@@ -6,19 +6,22 @@ import Home from './Pages/Home';
 import About from './Pages/About';
 import NotFound from './Pages/NotFound';
 import Footer from './components/Footer';
+import { GithubProvider } from './context/githubContext';
 
 function App() {
   return (
     <>
-      <HomeContain>
-        <Navbar title='GitHub' />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </HomeContain>
+      <GithubProvider>
+        <HomeContain>
+          <Navbar title='GitHub' />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </HomeContain>
+      </GithubProvider>
     </>
   );
 }
