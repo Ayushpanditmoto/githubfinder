@@ -10,8 +10,8 @@ function Navbar({ title }) {
       <NavTitle>
         <Link to='/'>
           <FaGithub />
+          {title}
         </Link>
-        <Link to='/'>{title}</Link>
       </NavTitle>
       <NavLinks>
         <Link to='/'>Home</Link>
@@ -37,6 +37,8 @@ const NavContain = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 8%;
+  width: 100%;
   padding: 1rem 1rem;
   background-color: #00e773;
   color: #fff;
@@ -46,11 +48,14 @@ const NavContain = styled.nav`
 
 const NavTitle = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
+  /* align-items: center;
+  justify-content: center; */
   color: white;
   a {
+    gap: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     font-size: 1.2rem;
     svg {
