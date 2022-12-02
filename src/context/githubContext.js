@@ -11,6 +11,7 @@ export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
     loading: false,
+    unauthorized: false,
   };
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
@@ -29,6 +30,17 @@ export const GithubProvider = ({ children }) => {
         authorization: `token ${GITHUB_TOKEN}`,
       },
     });
+    if (res.status === 403) {
+      alert('You have exceeded your rate limit. Please try again later.');
+      return;
+    }
+    if (res.status === 401) {
+      dispatch({
+        type: actionTypes.UNAUTHENTICATED_TOKEN,
+      });
+      return;
+      // throw new Error('Invalid token');
+    }
     const { items } = await res.json();
     console.log(items);
     dispatch({ type: actionTypes.GET_USERS, payload: items });
@@ -43,6 +55,7 @@ export const GithubProvider = ({ children }) => {
       value={{
         users: state.users,
         loading: state.loading,
+        unauthorized: state.unauthorized,
         searchUsers,
         clearUsers,
       }}

@@ -4,7 +4,10 @@ import GithubContext from '../context/githubContext';
 
 function UserSearch() {
   const [text, setText] = useState('');
-  const { users, searchUsers, clearUsers } = useContext(GithubContext);
+  const { users, searchUsers, clearUsers, unauthorized } =
+    useContext(GithubContext);
+
+  console.log(`unauthorized: ${unauthorized}`);
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -22,28 +25,52 @@ function UserSearch() {
   };
 
   return (
-    <SearchContain>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          value={text}
-          onChange={handleChange}
-          placeholder='Search for a user'
-        />
-        <div className='btnsearch'>
-          <button type='submit'>Search</button>
-          {users.length > 0 && (
-            <button type='button' onClick={clearUsers}>
-              Clear
-            </button>
-          )}
-        </div>
-      </form>
-    </SearchContain>
+    <>
+      <SearchContain>
+        <form onSubmit={handleSubmit}>
+          <input
+            type='text'
+            value={text}
+            onChange={handleChange}
+            placeholder='Search for a user'
+          />
+          <div className='btnsearch'>
+            <button type='submit'>Search</button>
+            {users.length > 0 && (
+              <button type='button' onClick={clearUsers}>
+                Clear
+              </button>
+            )}
+          </div>
+        </form>
+      </SearchContain>
+      {unauthorized && (
+        <UNAUTH>
+          <p>
+            You have exceeded your rate limit. Please try again later. If you
+            have a token, please add it to your .env file.
+          </p>
+        </UNAUTH>
+      )}
+    </>
   );
 }
 
 export default UserSearch;
+
+const UNAUTH = styled.div`
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  width: 300px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  p {
+    margin: 0;
+  }
+`;
 
 const SearchContain = styled.div`
   display: flex;
