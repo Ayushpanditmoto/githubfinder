@@ -1,13 +1,15 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import GithubContext from '../context/githubContext';
+import AlertContext from '../context/alertContext';
 
 function UserSearch() {
   const [text, setText] = useState('');
   const { users, searchUsers, clearUsers, unauthorized } =
     useContext(GithubContext);
+  const { setAlert } = useContext(AlertContext);
 
-  console.log(`unauthorized: ${unauthorized}`);
+  // console.log(`unauthorized: ${unauthorized}`);
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -17,7 +19,7 @@ function UserSearch() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text === '') {
-      alert('Please enter something', 'light');
+      setAlert('Please enter something', 'error');
     } else {
       searchUsers(text);
       setText('');

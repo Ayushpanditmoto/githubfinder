@@ -7,6 +7,13 @@ const githubReducer = (state, action) => {
         loading: false,
         unauthorized: false,
       };
+    case 'GET_USER':
+      return {
+        ...state,
+        user: action.payload,
+        loading: false,
+        unauthorized: false,
+      };
 
     case 'SET_LOADING':
       return {

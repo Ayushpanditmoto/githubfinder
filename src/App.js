@@ -5,22 +5,29 @@ import Navbar from './components/Navbar';
 import Home from './Pages/Home';
 import About from './Pages/About';
 import NotFound from './Pages/NotFound';
+import SingleUser from './components/singleUser';
 import Footer from './components/Footer';
 import { GithubProvider } from './context/githubContext';
+import { AlertProvider } from './context/alertContext';
+import Alert from './components/Alert';
 
 function App() {
   return (
     <>
       <GithubProvider>
-        <HomeContain>
-          <Navbar title='GitHub' />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </HomeContain>
+        <AlertProvider>
+          <HomeContain>
+            <Navbar title='GitHub' />
+            <Alert />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/user/:login' element={<SingleUser />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+            <Footer />
+          </HomeContain>
+        </AlertProvider>
       </GithubProvider>
     </>
   );
