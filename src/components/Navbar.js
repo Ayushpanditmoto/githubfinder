@@ -3,11 +3,14 @@ import { FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
+import { useContext } from 'react';
+import GithubContext from '../context/githubContext';
 
 function Navbar({ title }) {
+  const { clearUsers } = useContext(GithubContext);
   return (
     <NavContain>
-      <NavTitle>
+      <NavTitle onClick={clearUsers}>
         <Link to='/'>
           <FaGithub />
           {title}

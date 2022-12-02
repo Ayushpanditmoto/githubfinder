@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import User from './User';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -12,10 +12,7 @@ const override = {
 
 function UserResults() {
   const githubContext = useContext(GithubContext);
-  const { users, loading, fetchUsers } = githubContext;
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const { users, loading } = githubContext;
 
   return (
     <UserResultContainer>

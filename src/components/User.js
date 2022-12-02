@@ -19,16 +19,15 @@ export default User;
 const UserContainer = styled.div`
   background-color: #ffffff;
   height: auto;
-  width: 300px;
+  width: 350px;
   border-radius: 20px;
   padding: 2rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  display: flex;
   margin: 1rem;
   display: flex;
   gap: 1rem;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   img {
     width: 100px;
