@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import User from './User';
-import ClipLoader from 'react-spinners/ClipLoader';
+// import ClipLoader from 'react-spinners/ClipLoader';
 import GithubContext from '../context/githubContext';
+import Spinner from './Spinner';
 
-const override = {
-  display: 'block',
-  margin: '0 auto',
-  borderColor: '#00E773',
-};
+// const override = {
+//   display: 'block',
+//   margin: '0 auto',
+//   borderColor: '#00E773',
+// };
 
 function UserResults() {
   const githubContext = useContext(GithubContext);
@@ -17,14 +18,7 @@ function UserResults() {
   return (
     <UserResultContainer>
       {loading ? (
-        <ClipLoader
-          color={'#00E773'}
-          loading={loading}
-          cssOverride={override}
-          size={150}
-          aria-label='Loading Spinner'
-          data-testid='loader'
-        />
+        <Spinner loading={loading} />
       ) : (
         users.map((user) => <User key={user.id} user={user} />)
       )}

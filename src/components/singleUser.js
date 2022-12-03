@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import GithubContext from '../context/githubContext';
+import Spinner from './Spinner';
 
 function SingleUser() {
   const { login } = useParams();
@@ -9,6 +10,7 @@ function SingleUser() {
 
   useEffect(() => {
     getUser(login);
+    // eslint-disable-next-line
   }, []);
 
   const {
@@ -24,7 +26,7 @@ function SingleUser() {
     public_gists,
   } = user;
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Spinner loading={loading} />;
 
   return (
     <SingleUserContainer>
