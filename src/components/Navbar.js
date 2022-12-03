@@ -40,7 +40,7 @@ const NavContain = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 8%;
+  height: 80px;
   width: 100%;
   padding: 1rem 2rem;
   background-color: #00e773;

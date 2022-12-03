@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import GithubContext from '../context/githubContext';
 import Spinner from './Spinner';
@@ -15,15 +15,18 @@ function SingleUser() {
 
   const {
     name,
+    type,
     avatar_url,
     location,
     bio,
     blog,
+    twitter_username,
     html_url,
     followers,
     following,
     public_repos,
     public_gists,
+    hirable,
   } = user;
 
   if (loading) return <Spinner loading={loading} />;
@@ -40,9 +43,19 @@ function SingleUser() {
         <p>{bio}</p>
       </div>
       <div className='user-links'>
-        {login && <p>Username: {login}</p>}
-        {blog && <p>Website: {blog}</p>}
-        {html_url && <p>GitHub: {html_url}</p>}
+        {login && (
+          <p>
+            <a href={html_url} target='_blank' rel='noopener noreferrer'>
+              Visit {login}'s GitHub
+            </a>
+          </p>
+        )}
+        {blog && (
+          <p>
+            Website: <a href={blog || '#'}>Visit {login}'s Website</a>
+          </p>
+        )}
+        {/* {html_url && <p>GitHub: {html_url}</p>} */}
       </div>
       <div className='user-stats'>
         <div className='user-followers'>
@@ -96,6 +109,26 @@ const SingleUserContainer = styled.div`
     p {
       font-size: 1.5rem;
       margin: 1rem 0;
+    }
+  }
+  .user-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 0;
+    background-color: #00c8aa;
+    border-radius: 10px;
+    /* gap: 1rem; */
+    p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      a {
+        text-decoration: none;
+        font-weight: 700;
+        //text wrap
+        word-wrap: break-word;
+      }
     }
   }
   .user-stats {

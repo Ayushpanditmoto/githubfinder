@@ -15,7 +15,7 @@ export default Footer;
 const FooterContain = styled.footer`
   display: flex;
   width: 100%;
-  height: 8%;
+  height: 80px;
   justify-content: center;
   align-items: center;
   padding: 1rem 1rem;
