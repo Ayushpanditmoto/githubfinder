@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import GithubContext from '../context/githubContext';
 import AlertContext from '../context/alertContext';
@@ -25,6 +25,16 @@ function UserSearch() {
       setText('');
     }
   };
+
+  //live search
+  useEffect(() => {
+    if (!text.trim()) {
+      clearUsers();
+      return;
+    }
+    searchUsers(text);
+    // eslint-disable-next-line
+  }, [text]);
 
   return (
     <>
