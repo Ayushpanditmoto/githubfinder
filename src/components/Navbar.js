@@ -1,31 +1,31 @@
-import React from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { PropTypes } from 'prop-types';
-import styled from 'styled-components';
-import { useContext } from 'react';
-import GithubContext from '../context/githubContext';
+import React from "react";
+import { FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
+import styled from "styled-components";
+import { useContext } from "react";
+import GithubContext from "../context/githubContext";
 
 function Navbar({ title }) {
   const { clearUsers } = useContext(GithubContext);
   return (
     <NavContain>
       <NavTitle onClick={clearUsers}>
-        <Link to='/'>
+        <Link to="/">
           <FaGithub />
           {title}
         </Link>
       </NavTitle>
       <NavLinks>
-        <Link to='/'>Home</Link>
-        <Link to='/about'>About</Link>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
       </NavLinks>
     </NavContain>
   );
 }
 
 Navbar.defaultProps = {
-  title: 'GithubFinder',
+  title: "GithubFinder",
   icon: <FaGithub />,
 };
 
@@ -36,14 +36,13 @@ Navbar.propTypes = {
 
 export default Navbar;
 
-const NavContain = styled.nav`
+const NavContain = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
   width: 100%;
-  padding: 1rem 2rem;
-  background-color: #00e773;
+  padding: 0.7rem 2rem;
+  background-color: #0068e7;
   color: #fff;
   font-size: 1.2rem;
   font-weight: 700;
@@ -80,10 +79,10 @@ const NavLinks = styled.div`
     padding: 0.5rem 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 0.7rem;
     &:hover {
       text-decoration: none;
-      background-color: #14ca6c;
+      background-color: #0189dd;
     }
   }
 `;

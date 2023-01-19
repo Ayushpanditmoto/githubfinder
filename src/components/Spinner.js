@@ -1,22 +1,22 @@
-import ClipLoader from 'react-spinners/ClipLoader';
+import ClipLoader from "react-spinners/ClipLoader";
 
-import React from 'react';
+import React from "react";
 
 const override = {
-  display: 'block',
-  margin: '0 auto',
-  borderColor: '#00E773',
+  display: "block",
+  margin: "0 auto",
+  borderColor: "#0068e7",
 };
 
 function Spinner({ loading }) {
   return (
     <ClipLoader
-      color={'#00E773'}
+      color={"#0068e7"}
       loading={loading}
       cssOverride={override}
       size={150}
-      aria-label='Loading Spinner'
-      data-testid='loader'
+      aria-label="Loading Spinner"
+      data-testid="loader"
     />
   );
 }

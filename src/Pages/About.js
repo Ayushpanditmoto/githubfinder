@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 function About() {
   return (
@@ -21,10 +21,10 @@ const AboutContain = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: calc(100vh - 8% - 8%);
+  height: calc(100vh - 55.2px - 60px);
   padding: 1rem 1rem;
   width: 100vw;
-  background-color: #19d096;
+  background-color: #008fcc;
   color: white;
   h1 {
     font-size: 3rem;

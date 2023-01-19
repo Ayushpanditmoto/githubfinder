@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
-import GithubContext from '../context/githubContext';
-import AlertContext from '../context/alertContext';
+import React, { useState, useEffect, useContext } from "react";
+import styled from "styled-components";
+import GithubContext from "../context/githubContext";
+import AlertContext from "../context/alertContext";
 
 function UserSearch() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const { users, searchUsers, clearUsers, unauthorized } =
     useContext(GithubContext);
   const { setAlert } = useContext(AlertContext);
@@ -18,11 +18,11 @@ function UserSearch() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text === '') {
-      setAlert('Please enter something', 'error');
+    if (text === "") {
+      setAlert("Please enter something", "error");
     } else {
       searchUsers(text);
-      setText('');
+      setText("");
     }
   };
 
@@ -41,17 +41,22 @@ function UserSearch() {
       <SearchContain>
         <form onSubmit={handleSubmit}>
           <input
-            type='text'
+            type="text"
             value={text}
             onChange={handleChange}
-            placeholder='Search for a user'
+            placeholder="Search for a user"
           />
-          <div className='btnsearch'>
-            <button type='submit'>Search</button>
+          <div className="btnsearch">
+            <div className="btnsearching">
+              <button type="submit">Search</button>
+            </div>
+
             {users.length > 0 && (
-              <button type='button' onClick={clearUsers}>
-                Clear
-              </button>
+              <div className="cancel">
+                <button type="button" onClick={clearUsers}>
+                  Clear
+                </button>
+              </div>
             )}
           </div>
         </form>
@@ -89,26 +94,18 @@ const SearchContain = styled.div`
   justify-content: center;
   align-items: center;
   margin: 1.3rem 0;
-  .btnsearch button {
-    background-color: #00dc7c;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    margin: 0.5 0.5rem;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: 700;
+  .btnsearch {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
   }
   form {
     display: flex;
+    flex-direction: row;
     /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     gap: 1rem;
-  }
-  .btnsearch button:hover {
-    background-color: #00b86b;
   }
   input {
     padding: 0.5rem;

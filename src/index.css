@@ -19,3 +19,18 @@ ul{
 img{
     width: 100%;
 }
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #0068e7;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+button:hover{
+    background-color: #0052b3;
+}
