@@ -1,6 +1,6 @@
-import { createContext, useReducer } from 'react';
-import { actionTypes } from './actionType';
-import githubReducer from './githubReducer';
+import { createContext, useReducer } from "react";
+import { actionTypes } from "./actionType";
+import githubReducer from "./githubReducer";
 
 const GithubContext = createContext();
 
@@ -11,6 +11,7 @@ export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
     user: [],
+    repos: [],
     loading: false,
     unauthorized: false,
   };
@@ -32,7 +33,7 @@ export const GithubProvider = ({ children }) => {
       },
     });
     if (res.status === 403) {
-      alert('You have exceeded your rate limit. Please try again later.');
+      alert("You have exceeded your rate limit. Please try again later.");
       return;
     }
     if (res.status === 401) {
@@ -57,13 +58,31 @@ export const GithubProvider = ({ children }) => {
       },
     });
     if (res.status === 404) {
-      window.location = '/notfound';
+      window.location = "/notfound";
       return;
     } else {
       const data = await res.json();
       console.log(data);
       dispatch({ type: actionTypes.GET_USER, payload: data });
     }
+  };
+  // Get user repos
+  const getUserRepos = async (username) => {
+    setLoading();
+
+    const params = new URLSearchParams({
+      sort: "created: asc",
+      per_page: 1000,
+    });
+
+    const res = await fetch(`${GITHUB_URL}/users/${username}/repos?${params}`, {
+      headers: {
+        authorization: `token ${GITHUB_TOKEN}`,
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+    dispatch({ type: actionTypes.GET_REPOS, payload: data });
   };
 
   const setLoading = () => {
@@ -73,13 +92,16 @@ export const GithubProvider = ({ children }) => {
   return (
     <GithubContext.Provider
       value={{
-        user: state.user,
-        users: state.users,
-        loading: state.loading,
-        unauthorized: state.unauthorized,
+        // user: state.user,
+        // users: state.users,
+        // loading: state.loading,
+        // unauthorized: state.unauthorized,
+        // repos: state.repos,
+        ...state,
         searchUsers,
         clearUsers,
         getUser,
+        getUserRepos,
       }}
     >
       {children}

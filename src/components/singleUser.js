@@ -1,79 +1,83 @@
-import React, { useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import GithubContext from '../context/githubContext';
-import Spinner from './Spinner';
+import React, { useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import GithubContext from "../context/githubContext";
+import Spinner from "./Spinner";
+import RepoList from "./RepoList";
 
 function SingleUser() {
   const { login } = useParams();
-  const { user, getUser, loading } = useContext(GithubContext);
+  const { user, getUser, loading, getUserRepos, repos } =
+    useContext(GithubContext);
 
   useEffect(() => {
     getUser(login);
+    getUserRepos(login);
     // eslint-disable-next-line
   }, []);
 
   const {
     name,
-    type,
     avatar_url,
     location,
     bio,
     blog,
-    twitter_username,
     html_url,
     followers,
     following,
     public_repos,
     public_gists,
-    hirable,
   } = user;
 
   if (loading) return <Spinner loading={loading} />;
 
   return (
     <SingleUserContainer>
-      <div className='user-info'>
+      <div className="user-info">
         <img src={avatar_url} alt={name} />
         <h2>{name}</h2>
         <p>{location}</p>
       </div>
-      <div className='user-bio'>
+      <div className="user-bio">
         <h3>Bio</h3>
         <p>{bio}</p>
       </div>
-      <div className='user-links'>
+      <div className="user-links">
         {login && (
           <p>
-            <a href={html_url} target='_blank' rel='noopener noreferrer'>
+            <a href={html_url} target="_blank" rel="noopener noreferrer">
               Visit {login}'s GitHub
             </a>
           </p>
         )}
         {blog && (
           <p>
-            Website: <a href={blog || '#'}>Visit {login}'s Website</a>
+            Website: <a href={blog || "#"}>Visit {login}'s Website</a>
           </p>
         )}
         {/* {html_url && <p>GitHub: {html_url}</p>} */}
       </div>
-      <div className='user-stats'>
-        <div className='user-followers'>
+      <div className="user-stats">
+        <div className="user-followers">
           <h3>Followers</h3>
           <p>{followers}</p>
         </div>
-        <div className='user-following'>
+        <div className="user-following">
           <h3>Following</h3>
           <p>{following}</p>
         </div>
-        <div className='user-repos'>
+        <div className="user-repos">
           <h3>Repos</h3>
           <p>{public_repos}</p>
         </div>
-        <div className='user-gists'>
+        <div className="user-gists">
           <h3>Gists</h3>
           <p>{public_gists}</p>
         </div>
+      </div>
+      <div className="repo">
+        <h2>Latest Respository</h2>
+        {repos && <RepoList repos={repos} />}
       </div>
     </SingleUserContainer>
   );
@@ -82,6 +86,22 @@ function SingleUser() {
 export default SingleUser;
 
 const SingleUserContainer = styled.div`
+  .repo {
+    width: 100%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 10px;
+    max-width: 700px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h2 {
+      font-size: 2rem;
+      margin: 1rem 0;
+    }
+  }
   padding: 50px 20px;
   width: 100%;
   height: auto;
@@ -117,7 +137,7 @@ const SingleUserContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 0.5rem 0;
-    background-color: #00c8aa;
+    background-color: #0068e7;
     border-radius: 10px;
     /* gap: 1rem; */
     p {
@@ -126,7 +146,8 @@ const SingleUserContainer = styled.div`
       a {
         text-decoration: none;
         font-weight: 700;
-        //text wrap
+        color: white;
+
         word-wrap: break-word;
       }
     }
