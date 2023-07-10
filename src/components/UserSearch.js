@@ -110,12 +110,28 @@ const SearchContain = styled.div`
   input {
     padding: 0.5rem;
     border: none;
+    background-color: ${props=>props.theme.name === "light"?"white":"#635985"};
+    color:${props=>props.theme.text};
     border-radius: 5px;
     outline: none;
     font-size: 1rem;
     width: 320px;
     height: 50px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color:  ${props=>props.theme.name === "light"?"#8e8e8e":"#393053"};
+    }
+    ::placeholder {
+      color:  ${props=>props.theme.name === "light"?"#8e8e8e":"#393053"};
+    }
+  }
+  button {
+    background-color: ${props=>props.theme.secondary};
+
+    &:hover {
+      background-color: ${props=>props.theme.primary};
+    }
   }
   //media query
   @media (max-width: 768px) {

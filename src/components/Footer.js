@@ -19,7 +19,7 @@ const FooterContain = styled.footer`
   justify-content: center;
   align-items: center;
   padding: 1rem 1rem;
-  background-color: #0068e7;
+  background-color: ${props=>props.theme.primary};
   color: #fff;
   font-size: 1.2rem;
   font-weight: 700;

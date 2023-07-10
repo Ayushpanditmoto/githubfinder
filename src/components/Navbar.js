@@ -5,8 +5,9 @@ import { PropTypes } from "prop-types";
 import styled from "styled-components";
 import { useContext } from "react";
 import GithubContext from "../context/githubContext";
+import ThemeToggle from "./ThemeToggle";
 
-function Navbar({ title }) {
+function Navbar({ title, toggleThemeHandler, theme }) {
   const { clearUsers } = useContext(GithubContext);
   return (
     <NavContain>
@@ -17,6 +18,7 @@ function Navbar({ title }) {
         </Link>
       </NavTitle>
       <NavLinks>
+        <ThemeToggle toggleThemeHandler={toggleThemeHandler} theme={theme}/>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
       </NavLinks>
@@ -42,7 +44,7 @@ const NavContain = styled.div`
   align-items: center;
   width: 100%;
   padding: 0.7rem 2rem;
-  background-color: #0068e7;
+  background-color: ${props=>props.theme.primary};
   color: #fff;
   font-size: 1.2rem;
   font-weight: 700;
@@ -82,7 +84,7 @@ const NavLinks = styled.div`
     font-size: 0.7rem;
     &:hover {
       text-decoration: none;
-      background-color: #0189dd;
+      background-color: ${props=>props.theme.secondary};
     }
   }
 `;
