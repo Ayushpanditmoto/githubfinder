@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function RepoList({ repos }) {
   return (
-    <div>
+    <>
       {repos.map((repo, index) => {
         const { id, name, html_url, description } = repo;
         return (
@@ -16,20 +16,24 @@ function RepoList({ repos }) {
           </RepoItems>
         );
       })}
-    </div>
+    </>
   );
 }
 
 export default RepoList;
 
 const RepoItems = styled.div`
-  margin: 1rem 0;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 5px;
-  background-color: #0068e7;
+  padding: 20px;
+  width: 100%;
+  background-color:  ${props=>props.theme.primary};
   h3 {
     color: #fff;
+    width: 100%;
     font-size: 1.5rem;
     font-weight: 500;
   }
@@ -37,14 +41,16 @@ const RepoItems = styled.div`
     color: #fff;
     font-size: 1rem;
     font-weight: 400;
+    margin-bottom:20px;
     padding: 0.5rem 0;
   }
   a {
-    color: #3c3c3c;
+    color:  ${props=>props.theme.text};
     font-size: 1rem;
-    background-color: #fff;
+    background-color:  ${props=>props.theme.name === "light"?"white":"#635985"};
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    max-width:700px;
     cursor: pointer;
     font-weight: 400;
   }

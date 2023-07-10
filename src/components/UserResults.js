@@ -32,5 +32,6 @@ const UserResultContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  gap:1rem;
   flex-wrap: wrap;
 `;

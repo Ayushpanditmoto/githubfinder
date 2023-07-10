@@ -10,23 +10,35 @@ import Footer from './components/Footer';
 import { GithubProvider } from './context/githubContext';
 import { AlertProvider } from './context/alertContext';
 import Alert from './components/Alert';
+import { ThemeProvider } from 'styled-components';
+import { useState } from 'react';
+import { GlobalStyles, darkMode, lightMode } from './theme.js';
 
 function App() {
+  const [theme, setTheme] = useState("light")
+
+  const toggleThemeMode = () => {
+    setTheme((previousValue)=>previousValue==="light"?"dark":"light");
+  }
+
   return (
     <>
       <GithubProvider>
         <AlertProvider>
-          <HomeContain>
-            <Navbar title='GitHub' />
-            <Alert />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/about' element={<About />} />
-              <Route path='/user/:login' element={<SingleUser />} />
-              <Route path='*' element={<NotFound />} />
-            </Routes>
-            <Footer />
-          </HomeContain>
+          <ThemeProvider theme={theme === "light"?lightMode:darkMode}>
+            <GlobalStyles/>
+            <HomeContain>
+              <Navbar title='GitHub' toggleThemeHandler={toggleThemeMode} theme={theme}/>
+              <Alert />
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/user/:login' element={<SingleUser />} />
+                <Route path='*' element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </HomeContain>
+          </ThemeProvider>
         </AlertProvider>
       </GithubProvider>
     </>

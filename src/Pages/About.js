@@ -24,7 +24,7 @@ const AboutContain = styled.div`
   height: calc(100vh - 55.2px - 60px);
   padding: 1rem 1rem;
   width: 100vw;
-  background-color: #008fcc;
+  background-color: ${props=>props.theme.secondary};
   color: white;
   h1 {
     font-size: 3rem;
